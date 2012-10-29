@@ -30,12 +30,16 @@ for k in range(len(j)):
     print 'incination', i
     
     wav, nufnu = m.get_sed(inclination=i, aperture=-1, distance=300 * pc)
-    lines=ax.loglog(wav,nufnu.transpose())
-    #fig.colorbar(lines)
-
     # Plot the SED. The loglog command is similar to plot, but automatically
     # sets the x and y axes to be on a log scale.
+    lines = ax.loglog(wav,nufnu.transpose())
+    
     ax.loglog(wav, nufnu,color=g)
+
+#colorbar    
+image = wav,nufnu.transpose()
+lines = ax.imshow(image,cmap=plt.cm.gist_heat)    
+fig.colorbar(lines)
 
 # Add some axis labels (we are using LaTeX here)
 ax.set_xlabel(r'$\lambda$ [$\mu$m]')
