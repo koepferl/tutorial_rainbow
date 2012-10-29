@@ -10,7 +10,7 @@ from hyperion.util.constants import pc
 m = ModelOutput('output.rtout')
 
 # Create the plot
-fig = plt.figure()
+fig = plt.figure(dpi=100)
 ax = fig.add_subplot(1, 1, 1)
 
 # Extract the SED for the smallest inclination and largest aperture, and
