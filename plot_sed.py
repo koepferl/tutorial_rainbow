@@ -18,7 +18,7 @@ ax = fig.add_subplot(1, 1, 1)
 # arrays, and indicate the position from the end. So to get the SED in the
 # largest aperture, we set aperture=-1.
 
-f = np.linspace(0, 255, 10)
+f = np.linspace(0, 256, 10)
 print f
 j = [0,1,2,3,4,5,6,7,8,9]
 for k in range(len(j)):
@@ -30,16 +30,20 @@ for k in range(len(j)):
     print 'incination', i
     
     wav, nufnu = m.get_sed(inclination=i, aperture=-1, distance=300 * pc)
+    lines = ax.loglog(wav,nufnu.transpose())
     # Plot the SED. The loglog command is similar to plot, but automatically
     # sets the x and y axes to be on a log scale.
-    lines = ax.loglog(wav,nufnu.transpose())
-    
+
     ax.loglog(wav, nufnu,color=g)
 
 #colorbar    
-image = wav,nufnu.transpose()
-lines = ax.imshow(image,cmap=plt.cm.gist_heat)    
-fig.colorbar(lines)
+#image = wav,nufnu.transpose()
+#lines = ax.loglog(image,cmap=plt.cm.gist_heat) 
+bar = fig.add_axes([0.91,0.1,0.02,0.8])
+norm = mpl.colors.Normalize(vmin=0, vmax=90)
+
+cb=mpl.colorbar.ColorbarBase(bar, cmap=plt.cm.gist_heat, norm=norm)
+cb.set_label('Inclination [deg]')
 
 # Add some axis labels (we are using LaTeX here)
 ax.set_xlabel(r'$\lambda$ [$\mu$m]')
