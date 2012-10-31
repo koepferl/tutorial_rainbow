@@ -30,7 +30,7 @@ for k in range(len(j)):
     print 'incination', i
     
     wav, nufnu = m.get_sed(inclination=i, aperture=-1, distance=300 * pc)
-    lines = ax.loglog(wav,nufnu.transpose())
+    #lines = ax.loglog(wav,nufnu.transpose())
     # Plot the SED. The loglog command is similar to plot, but automatically
     # sets the x and y axes to be on a log scale.
 
@@ -54,4 +54,4 @@ ax.set_xlim(0.1, 2000.)
 ax.set_ylim(1.e-15, 2.e-09)
 
 # Write out the plot
-fig.savefig('sedall.png')
+fig.savefig('sedall.pdf')
